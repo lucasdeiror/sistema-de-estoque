@@ -43,7 +43,7 @@ src/main/java/
 
 ### A regra de dependência
 
-`core/` nunca importa nada de `infra/` ou `application/`. A interface `ProdutoRepository` — o contrato de "salvar, buscar, listar produtos" — é definida **dentro do core**; quem a implementa de verdade (`InMemoryProdutoRepository`, hoje usando um `Map` em memória) fica em `infra/`. Isso significa que trocar a forma de armazenamento (por exemplo, para persistência real com JDBC/MySQL, numa fase futura) exige mudar apenas a camada `infra/` — o `core` e os casos de uso continuam intactos.
+`core/` nunca importa nada de `infra/` ou `application/`. A interface `ProdutoRepository` — o contrato de "salvar, buscar, listar produtos" — é definida **dentro do core**; quem a implementa de verdade (`ProdutoRepositoryJDBC`, hoje usando um `Map` em memória) fica em `infra/`. Isso significa que trocar a forma de armazenamento (por exemplo, para persistência real com JDBC/MySQL, numa fase futura) exige mudar apenas a camada `infra/` — o `core` e os casos de uso continuam intactos.
 
 ## Tecnologias
 
@@ -55,7 +55,7 @@ src/main/java/
 
 ⬜ Entidade `Produto` e exceções de domínio
 ⬜ Interface `ProdutoRepository`
-⬜ `InMemoryProdutoRepository` (implementação com `Map`)
+⬜ `ProdutoRepositoryJDBC` (implementação com `Map`)
 ⬜ Casos de uso (cadastrar, listar, buscar, registrar movimentação)
 ⬜ CLI de interação (`Application`)
 
