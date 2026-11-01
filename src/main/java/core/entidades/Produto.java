@@ -50,12 +50,21 @@ public class Produto {
         this.estoque += quantidade;
     }
 
-    public void removerEstoque(int quantidade){
-        if(estoque <= 0 ){
+    public void removerEstoque(int quantidade) {
+
+        if (quantidade <= 0) {
             throw new IllegalArgumentException(
-                    "Quantidade deve ser positiva"
+                    "A quantidade deve ser positiva."
             );
         }
+
+        if (quantidade > estoque) {
+            throw new IllegalArgumentException(
+                    "Estoque insuficiente."
+            );
+        }
+
+        this.estoque -= quantidade;
     }
 
 
