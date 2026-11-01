@@ -1,14 +1,18 @@
 package core.DTO;
 
-
-import core.usecase.CadastrarProdutoUseCase;
-
 public class CadastroProdutoDTO {
-    private String nome,categoria;
-    private float preco;
-    private int estoque;
 
-    public CadastroProdutoDTO(String nome, String categoria, float preco, int estoque) {
+    private final String nome;
+    private final String categoria;
+    private final float preco;
+    private final int estoque;
+
+    public CadastroProdutoDTO(
+            String nome,
+            String categoria,
+            float preco,
+            int estoque
+    ) {
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;
