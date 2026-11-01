@@ -2,18 +2,21 @@ package core.repository;
 
 import core.entidades.Produto;
 
-
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
-import java.util.Optional;
-
 public interface ProdutoRepository {
-    public void salvar(Produto produto);
-    public void deletar(String nome);
-    public Optional<Produto> buscarPorId(UUID id);
-    public List<Produto> buscarPorNome(String nome);
-    public void atualizar(Produto produto);
-    public List<Produto> listar();
+
+    void salvar(Produto produto);
+
+    void deletar(UUID id);
+
+    Optional<Produto> buscarPorId(UUID id);
+
+    List<Produto> buscarPorNome(String nome);
+
+    void atualizar(Produto produto);
+
+    List<Produto> listar();
 }
