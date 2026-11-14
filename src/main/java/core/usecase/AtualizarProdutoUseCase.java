@@ -1,9 +1,11 @@
 package core.usecase;
 
+import core.entidades.Categoria;
 import core.entidades.Produto;
 import core.exception.ProdutoNaoEncontradoException;
 import core.repository.ProdutoRepository;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class AtualizarProdutoUseCase {
@@ -17,8 +19,8 @@ public class AtualizarProdutoUseCase {
     public Produto atualizarProduto(
             UUID id,
             String nome,
-            String categoria,
-            float preco,
+            Categoria categoria,
+            BigDecimal preco,
             int estoque
     ) {
         if (id == null) {
