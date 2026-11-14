@@ -2,6 +2,7 @@ package core.controller;
 
 import core.DTO.BuscaProdutoDTO;
 import core.DTO.CadastroProdutoDTO;
+import core.entidades.Categoria;
 import core.entidades.Produto;
 import core.usecase.AtualizarProdutoUseCase;
 import core.usecase.BuscarProdutoUseCase;
@@ -9,6 +10,7 @@ import core.usecase.CadastrarProdutoUseCase;
 import core.usecase.DeletarProdutoUseCase;
 import core.usecase.ListarProdutosUseCase;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,8 +38,8 @@ public class ProdutoController {
 
     public Produto cadastrarProduto(
             String nome,
-            String categoria,
-            float preco,
+            Categoria categoria,
+            BigDecimal preco,
             int estoque
     ) {
         CadastroProdutoDTO dadosProduto = new CadastroProdutoDTO(
@@ -73,8 +75,8 @@ public class ProdutoController {
     public Produto atualizarProduto(
             UUID id,
             String nome,
-            String categoria,
-            float preco,
+            Categoria categoria,
+            BigDecimal preco,
             int estoque
     ) {
         return atualizarProdutoUseCase.atualizarProduto(
