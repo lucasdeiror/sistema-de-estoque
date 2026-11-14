@@ -1,36 +1,40 @@
+
 package core.entidades;
 
 import core.exception.CadastroInvalidoException;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Produto {
+
     private UUID id;
-    private String nome,categoria;
-    private float preco;
+    private String nome;
+    private Categoria categoria;
+    private BigDecimal preco;
     private int estoque;
 
     public Produto() {
     }
 
-    public Produto(UUID id, String nome, String categoria, float preco, int estoque) {
+    public Produto(UUID id, String nome, Categoria categoria,
+                   BigDecimal preco, int estoque) {
 
         if (nome == null || nome.isBlank()) {
             throw new CadastroInvalidoException("Nome é obrigatório.");
         }
 
-        if (categoria == null || categoria.isBlank()) {
+        if (categoria == null || categoria.getNome() == null || categoria.getNome().isBlank()) {
             throw new CadastroInvalidoException("Categoria é obrigatória.");
         }
 
-        if (preco < 0) {
-            throw new CadastroInvalidoException("Preço não pode ser negativo.");
+        if (preco == null || preco.compareTo(BigDecimal.ZERO) < 0) {
+            throw new CadastroInvalidoException("Preço inválido.");
         }
 
         if (estoque < 0) {
             throw new CadastroInvalidoException("Estoque não pode ser negativo.");
         }
-
 
         this.id = id;
         this.nome = nome;
@@ -40,34 +44,23 @@ public class Produto {
     }
 
     public void adicionarEstoque(int quantidade) {
-
-        if (quantidade <= 0 ) {
-            throw new IllegalArgumentException(
-                    "Quantidade deve ser positiva"
-            );
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade deve ser positiva.");
         }
-
         this.estoque += quantidade;
     }
 
     public void removerEstoque(int quantidade) {
-
         if (quantidade <= 0) {
-            throw new IllegalArgumentException(
-                    "A quantidade deve ser positiva."
-            );
+            throw new IllegalArgumentException("Quantidade deve ser positiva.");
         }
 
         if (quantidade > estoque) {
-            throw new IllegalArgumentException(
-                    "Estoque insuficiente."
-            );
+            throw new IllegalArgumentException("Estoque insuficiente.");
         }
 
         this.estoque -= quantidade;
     }
-
-
 
     public UUID getId() {
         return id;
@@ -85,20 +78,20 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public float getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(float valor) {
-        this.preco = valor;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
     public int getEstoque() {
