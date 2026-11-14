@@ -1,9 +1,11 @@
 package ui;
 
 import core.controller.ProdutoController;
+import core.entidades.Categoria;
 import core.entidades.Produto;
 import core.exception.ProdutoNaoEncontradoException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -65,8 +67,8 @@ public class MenuConsole {
 
         try {
             String nome = lerTexto("Nome: ");
-            String categoria = lerTexto("Categoria: ");
-            float preco = lerFloat("Preço: ");
+            Categoria categoria = new Categoria(UUID.randomUUID(), lerTexto("Categoria: "));
+            BigDecimal preco = lerBigDecimal("Preço: ");
             int estoque = lerInteiro("Estoque: ");
 
             Produto produto = produtoController.cadastrarProduto(
@@ -151,16 +153,14 @@ public class MenuConsole {
             System.out.println("Não foi possível excluir: " + e.getMessage());
         }
     }
-
     private void atualizarProduto() {
         System.out.println("\n=== Atualizar produto ===");
 
         try {
             UUID id = lerUUID("ID do produto que deseja atualizar: ");
-
             String nome = lerTexto("Novo nome: ");
-            String categoria = lerTexto("Nova categoria: ");
-            float preco = lerFloat("Novo preço: ");
+            Categoria categoria = new Categoria(UUID.randomUUID(), lerTexto("Nova categoria: "));
+            BigDecimal preco = lerBigDecimal("Novo preço: ");
             int estoque = lerInteiro("Novo estoque: ");
 
             Produto produtoAtualizado = produtoController.atualizarProduto(
@@ -189,7 +189,7 @@ public class MenuConsole {
         System.out.println("------------------------------");
         System.out.println("ID: " + produto.getId());
         System.out.println("Nome: " + produto.getNome());
-        System.out.println("Categoria: " + produto.getCategoria());
+        System.out.println("Categoria: " + produto.getCategoria().getNome());
         System.out.println("Preço: " + produto.getPreco());
         System.out.println("Estoque: " + produto.getEstoque());
         System.out.println("------------------------------");
@@ -218,7 +218,7 @@ public class MenuConsole {
         }
     }
 
-    private float lerFloat(String mensagem) {
+    private BigDecimal lerBigDecimal(String mensagem) {
 
         while (true) {
 
@@ -229,7 +229,7 @@ public class MenuConsole {
                     .replace(',', '.');
 
             try {
-                return Float.parseFloat(valor);
+                return new BigDecimal(valor);
             } catch (NumberFormatException e) {
                 System.out.println("Digite um preço válido.");
             }
