@@ -1,16 +1,20 @@
 package core.DTO;
 
+import core.entidades.Categoria;
+
+import java.math.BigDecimal;
+
 public class CadastroProdutoDTO {
 
     private final String nome;
-    private final String categoria;
-    private final float preco;
+    private final Categoria categoria;
+    private final BigDecimal preco;
     private final int estoque;
 
     public CadastroProdutoDTO(
             String nome,
-            String categoria,
-            float preco,
+            Categoria categoria,
+            BigDecimal preco,
             int estoque
     ) {
         this.nome = nome;
@@ -23,11 +27,11 @@ public class CadastroProdutoDTO {
         return nome;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public float getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
